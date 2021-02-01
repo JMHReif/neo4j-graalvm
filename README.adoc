@@ -1,0 +1,43 @@
+== Connect to Neo4j with GraalVM languages
+Connect to Neo4j from different programming languages using GraalVM.
+
+Setup steps (basic GraalVM and Neo4j install):
+
+1) Download https://neo4j.com/download-center/#desktop[Neo4j Desktop^], https://neo4j.com/download-center/#community[community server^], or start up a https://sandbox.neo4j.com/[sandbox^] from neo4j.com
+2) Follow download instructions to set up the database and start it
+3) Download and install GraalVM SDK. https://www.graalvm.org/docs/getting-started/#install-graalvm[GraalVM docs^] shows one way, but I used https://sdkman.io/[SDKMAN!^] to install it and set GraalVM's Java (currently `20.3.0.r11-grl`) as my default SDK.
+4) Install any GraalVM languages you intend to use with the https://www.graalvm.org/reference-manual/graalvm-updater/#component-installation[GraalVM Updater^] (gu). Use command syntax `gu install <language>`. *Note:* there may be a couple of other steps for dependencies to run a language, see the https://www.graalvm.org/reference-manual/languages/[docs^] for each language.
+5) Create and start an instance of Neo4j (if you are using Neo4j Sandbox, then this is already done for you).
+
+Steps to run the examples:
+
+1) Download https://search.maven.org/remotecontent?filepath=org/neo4j/driver/neo4j-java-driver/4.0.3/neo4j-java-driver-4.0.3.jar[Java driver (4.0.3)^] and https://search.maven.org/remotecontent?filepath=org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar[reactive stream (1.0.3)^] dependencies.
+2) Clone this repository and open in your preferred IDE
+3) For each program language you intend to run, open the file and change the password on the `authTokens.basic('neo4j', 'Testing123')` line to be the password you set for your database. Note: If using Neo4j Sandbox, you will also need to modify the line above the authTokens with the sandbox connection BOLT URL.
+4) Save and close the program(s), then build the project
+5) Navigate to `src/main/java` folder and run one of the programs using the related command below.
+
+[source,shell]
+----
+#Python
+graalpython --jvm graalvm-test.py
+
+#Javascript
+js --jvm neo4j-graalvm-javascript-example.js
+
+#R
+Rscript --jvm neo4j-graalvm-fastr-example.R
+
+#Ruby
+#Ruby does not (yet?) support adding Java dependencies to classpath, so have to set them on the command line
+export CLASSPATH=../../../target/lib/neo4j-java-driver-4.0.3.jar:../../../target/lib/reactive-streams-1.0.3.jar
+truffleruby --jvm --vm.cp=$CLASSPATH neo4j-graalvm-ruby-example.rb
+----
+
+== Resources
+
+* https://www.graalvm.org/docs/introduction/[GraalVM documentation^]
+* https://www.graalvm.org/reference-manual/languages/[GraalVM language reference manual^]
+* https://neo4j.com/download-center/[Neo4j downloads^]
+* https://neo4j.com/developer/get-started/[Neo4j developer guides^]
+//* https://neo4j.com/labs/howto/graalvm/[GraalVM Neo4j Labs project^]

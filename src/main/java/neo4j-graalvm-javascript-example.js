@@ -1,6 +1,6 @@
 // Add Java libraries to GraalVM from JavaScript
-Java.addToClasspath("target/lib/reactive-streams-1.0.3.jar")
-Java.addToClasspath("target/lib/neo4j-java-driver-4.0.3.jar")
+Java.addToClasspath("../../../target/lib/reactive-streams-1.0.3.jar")
+Java.addToClasspath("../../../target/lib/neo4j-java-driver-4.0.3.jar")
 
 // This brings in the required classes
 const GraphDatabase = Java.type('org.neo4j.driver.GraphDatabase')

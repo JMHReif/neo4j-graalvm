@@ -1,8 +1,8 @@
 import java
 
 # Add Java libraries to GraalVM from Python
-java.add_to_classpath("target/lib/reactive-streams-1.0.3.jar")
-java.add_to_classpath("target/lib/neo4j-java-driver-4.0.3.jar")
+java.add_to_classpath("../../../target/lib/reactive-streams-1.0.3.jar")
+java.add_to_classpath("../../../target/lib/neo4j-java-driver-4.0.3.jar")
 
 # This brings in the required classes
 graphDatabase = java.type('org.neo4j.driver.GraphDatabase')

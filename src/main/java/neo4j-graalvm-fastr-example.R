@@ -1,6 +1,6 @@
 # Add Java libraries to GraalVM from R
-java.addToClasspath("target/lib/reactive-streams-1.0.3.jar")
-java.addToClasspath("target/lib/neo4j-java-driver-4.0.3.jar")
+java.addToClasspath("../../../target/lib/reactive-streams-1.0.3.jar")
+java.addToClasspath("../../../target/lib/neo4j-java-driver-4.0.3.jar")
 
 # This brings in the required classes
 graphDatabase <- java.type('org.neo4j.driver.GraphDatabase')

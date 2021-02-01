@@ -21,7 +21,8 @@ def findConnections(driver)
 
     sessionConfig = Java.type('org.neo4j.driver.SessionConfig')
     session = driver.session(sessionConfig.forDatabase("neo4j"))
-    records = session.run(query, {:name=>"Tom Hanks"}).list()
+    #records = session.run(query, {:name=>"Tom Hanks"}).list()
+    records = session.run(query, Truffle::Interop.hash_keys_as_members({:name=>"Tom Hanks"})).list()
     records = Polyglot.as_enumerable(records)
 
     coActors = records.collect{ |r| r.get('coActor').get('name').asString() }
